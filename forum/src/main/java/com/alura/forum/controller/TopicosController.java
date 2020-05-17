@@ -52,6 +52,7 @@ public class TopicosController {
 		Page<Topico> topicos = topicoRepository.findAll(paginacao);
 		return TopicoDto.converter(topicos);
 		} else {
+			//page
 			Page<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso, paginacao);
 			return TopicoDto.converter(topicos);
 		}
