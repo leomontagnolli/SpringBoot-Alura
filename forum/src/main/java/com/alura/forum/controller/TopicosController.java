@@ -44,7 +44,6 @@ public class TopicosController {
 	@Autowired
 	private CursoRepository cursoRepository;
 	
-	
 	@GetMapping
 	@Cacheable(value = "listaTopicos")
 	public Page<TopicoDto> listar (@RequestParam(required = false) String nomeCurso,
@@ -55,12 +54,10 @@ public class TopicosController {
 		Page<Topico> topicos = topicoRepository.findAll(paginacao);
 		return TopicoDto.converter(topicos);
 		} else {
-			//page
 			Page<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso, paginacao);
 			return TopicoDto.converter(topicos);
 		}
 	}
-	
 	@GetMapping("/{id}")
 	public ResponseEntity<DetalhesDoTopicoDto> detalhar(@PathVariable Long id) {
 			Optional<Topico> topico = topicoRepository.findById(id);
@@ -68,11 +65,8 @@ public class TopicosController {
 				return ResponseEntity.ok(new DetalhesDoTopicoDto(topico.get()));
 			}
 			
-		return ResponseEntity.notFound().build();
-			
-		
+		return ResponseEntity.notFound().build();	
 	}
-	
 	 @PostMapping
 	 @Transactional
 	 @CacheEvict(value = "listaTopicos", allEntries = true)
@@ -93,7 +87,6 @@ public class TopicosController {
 				Topico topico = form.atualizar(id, topicoRepository);
 				return ResponseEntity.ok(new TopicoDto(topico));
 			}
-		 
 		return ResponseEntity.notFound().build();	 
 	 }
 	 
@@ -108,14 +101,5 @@ public class TopicosController {
 		 }
 		
 		 return ResponseEntity.notFound().build();	 
-		
 	 }
-	
-		
-		
-		
-		
-	
-	
-	
 }
