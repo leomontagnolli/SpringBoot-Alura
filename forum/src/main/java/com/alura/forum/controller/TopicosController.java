@@ -49,7 +49,6 @@ public class TopicosController {
 	public Page<TopicoDto> listar (@RequestParam(required = false) String nomeCurso,
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
 		
-		
 		if(nomeCurso == null) {
 		Page<Topico> topicos = topicoRepository.findAll(paginacao);
 		return TopicoDto.converter(topicos);
